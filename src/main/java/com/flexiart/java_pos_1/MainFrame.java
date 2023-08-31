@@ -27,7 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void addTable(int id, String item, int qty, double price)throws Exception{
         DefaultTableModel dt = (DefaultTableModel)jTable1.getModel();
         
-        DecimalFormat df = new DecimalFormat("00:00");
+        DecimalFormat df = new DecimalFormat("00.00");
         double tot = price*Double.valueOf(qty);
         String totalPrice = df.format(tot);
         
@@ -41,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
         v.add(id);
         v.add(item);
         v.add(qty);
-        v.add(tot);
+        v.add(totalPrice);
                 
         dt.addRow(v);
     }
@@ -90,15 +90,15 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        bill = new javax.swing.JTextArea();
         jButton9 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tot = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        balance = new javax.swing.JLabel();
+        payment = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
@@ -306,9 +306,10 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        bill.setEditable(false);
+        bill.setColumns(20);
+        bill.setRows(5);
+        jScrollPane2.setViewportView(bill);
 
         jButton9.setText("Delete");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -354,12 +355,12 @@ public class MainFrame extends javax.swing.JFrame {
         tot.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tot.setText("00");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("00");
+        balance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        balance.setText("00");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        payment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                paymentActionPerformed(evt);
             }
         });
 
@@ -389,8 +390,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(payment)
+                    .addComponent(balance, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(tot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,11 +411,11 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(payment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel6)))
+                            .addComponent(balance)))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -447,16 +448,53 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_paymentActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        try {
+            bill.setText(" ---------------------  Flexiart POS  --------------------- \n");
+//            bill.setText(bill.getText()+"                            Trail Version                           \n");
+            bill.setText(bill.getText()+"                         +9477 3431660                           \n");
+            bill.setText(bill.getText()+" \n");
+//            bill.setText(bill.getText()+" ---------------------  Flexiart POS  --------------------- \n");
+            bill.setText(bill.getText()+"  Item\t\tQTY     Price\n");
+            bill.setText(bill.getText()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+            
+            DefaultTableModel df = (DefaultTableModel)jTable1.getModel();
+            
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                String item = df.getValueAt(i, 1).toString();
+                String qty = df.getValueAt(i, 2).toString();
+                String price = df.getValueAt(i, 3).toString();
+                
+                bill.setText(bill.getText()+"  "+item+"\t  "+qty+"         "+price+"\n");
+            }
+            bill.setText(bill.getText()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+            bill.setText(bill.getText()+"Sub Total : "+tot.getText()+"\n");
+            bill.setText(bill.getText()+"Cash      : "+payment.getText()+"\n");
+            bill.setText(bill.getText()+"Balance   : "+balance.getText()+"\n");
+            bill.setText(bill.getText()+" \n");
+            bill.setText(bill.getText()+"                    Thank you. Come again!                 \n");
+            bill.setText(bill.getText()+" \n");
+            bill.setText(bill.getText()+" \n");
+            bill.setText(bill.getText()+" flexi-art.com                                           v1.0.0\n");
+            bill.setText(bill.getText()+" ================================== \n");
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        DecimalFormat df = new DecimalFormat("00.00");
+        
+        double total = Double.valueOf(tot.getText());
+        double pay = Double.valueOf(payment.getText());
+        double bal = pay - total;
+        
+        balance.setText(String.valueOf(df.format(bal)));
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -603,6 +641,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel balance;
+    private javax.swing.JTextArea bill;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -618,7 +658,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -628,8 +667,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField payment;
     private javax.swing.JLabel q1;
     private javax.swing.JLabel q2;
     private javax.swing.JLabel q3;
