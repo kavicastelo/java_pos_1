@@ -311,6 +311,11 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         jButton9.setText("Delete");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -473,7 +478,7 @@ public class MainFrame extends javax.swing.JFrame {
         q2.setText(String.valueOf(i));
         try {
             // TODO add your handling code here:
-            addTable(1, "Half /4Pc (HC)", i, 1990.99);
+            addTable(2, "Half /4Pc (HC)", i, 1990.99);
             tot();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -486,7 +491,7 @@ public class MainFrame extends javax.swing.JFrame {
         q3.setText(String.valueOf(i));
         try {
             // TODO add your handling code here:
-            addTable(1, "BUCKET/6PC (H&C)", i, 2850.00);
+            addTable(3, "BUCKET/6PC (H&C)", i, 2850.00);
             tot();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -499,7 +504,7 @@ public class MainFrame extends javax.swing.JFrame {
         q4.setText(String.valueOf(i));
         try {
             // TODO add your handling code here:
-            addTable(1, "Full/8Pc (HC)", i, 3880.00);
+            addTable(4, "Full/8Pc (HC)", i, 3880.00);
             tot();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -512,7 +517,7 @@ public class MainFrame extends javax.swing.JFrame {
         q5.setText(String.valueOf(i));
         try {
             // TODO add your handling code here:
-            addTable(1, "Bucket/12 Pc (HC)", i, 5650.00);
+            addTable(5, "Bucket/12 Pc (HC)", i, 5650.00);
             tot();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -525,12 +530,42 @@ public class MainFrame extends javax.swing.JFrame {
         q6.setText(String.valueOf(i));
         try {
             // TODO add your handling code here:
-            addTable(1, "1 Pc Choice (HC)", i, 680.00);
+            addTable(6, "1 Pc Choice (HC)", i, 680.00);
             tot();
         } catch (Exception ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        DefaultTableModel dt = (DefaultTableModel)jTable1.getModel();
+        
+        String rm = dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        
+        int row = jTable1.getSelectedRow();
+        dt.removeRow(row);
+        
+        switch(rm){
+            case "1":
+                q1.setText("0");
+                break;
+            case "2":
+                q2.setText("0");
+                break;
+            case "3":
+                q3.setText("0");
+                break;
+            case "4":
+                q4.setText("0");
+                break;
+            case "5":
+                q5.setText("0");
+                break;
+            case "6":
+                q6.setText("0");
+                break;
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
