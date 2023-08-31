@@ -1,8 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.flexiart.java_pos_1;
+
+import java.text.DecimalFormat;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +18,44 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
+    }
+    
+    public void addTable(int id, String item, int qty, double price)throws Exception{
+        DefaultTableModel dt = (DefaultTableModel)jTable1.getModel();
+        
+        DecimalFormat df = new DecimalFormat("00:00");
+        double tot = price*Double.valueOf(qty);
+        String totalPrice = df.format(tot);
+        
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            if(item == jTable1.getValueAt(i, 1)){
+                dt.removeRow(jTable1.convertRowIndexToModel(i));
+            }
+        }
+        
+        Vector v = new Vector();
+        v.add(id);
+        v.add(item);
+        v.add(qty);
+        v.add(tot);
+                
+        dt.addRow(v);
+    }
+    
+    public void tot(){
+        int numOfRows = jTable1.getRowCount();
+        double total = 0.0;
+        
+        for (int i = 0; i < numOfRows; i++) {
+            double val = Double.valueOf(jTable1.getValueAt(i, 3).toString());
+            total += val;
+        }
+//        DecimalFormat df = new DecimalFormat("00:00");
+        tot.setText(String.valueOf(total));
     }
 
     /**
@@ -55,7 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        tot = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
@@ -66,6 +107,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon("E:\\PROJECTS\\JAVA\\java_pos_1\\src\\images\\1.png")); // NOI18N
         jButton1.setToolTipText("");
         jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         q1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         q1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -80,6 +126,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon("E:\\PROJECTS\\JAVA\\java_pos_1\\src\\images\\2.png")); // NOI18N
         jButton2.setToolTipText("");
         jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         q3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         q3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -89,6 +140,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon("E:\\PROJECTS\\JAVA\\java_pos_1\\src\\images\\3.png")); // NOI18N
         jButton3.setToolTipText("");
         jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         q4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         q4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -98,6 +154,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton4.setIcon(new javax.swing.ImageIcon("E:\\PROJECTS\\JAVA\\java_pos_1\\src\\images\\4.png")); // NOI18N
         jButton4.setToolTipText("");
         jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         q5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         q5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,6 +168,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton5.setIcon(new javax.swing.ImageIcon("E:\\PROJECTS\\JAVA\\java_pos_1\\src\\images\\5.png")); // NOI18N
         jButton5.setToolTipText("");
         jButton5.setContentAreaFilled(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         q6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         q6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -116,6 +182,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton6.setIcon(new javax.swing.ImageIcon("E:\\PROJECTS\\JAVA\\java_pos_1\\src\\images\\6.png")); // NOI18N
         jButton6.setToolTipText("");
         jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Quarter/2Pc (HC)");
 
@@ -227,10 +298,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Item", "QTY", "Price"
@@ -278,8 +346,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Balance :");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("00");
+        tot.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tot.setText("00");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("00");
@@ -318,7 +386,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField1)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -333,7 +401,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel4))
+                            .addComponent(tot))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -386,6 +454,84 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int i = Integer.valueOf(q1.getText());
+        ++i;
+        q1.setText(String.valueOf(i));
+        try {
+            // TODO add your handling code here:
+            addTable(1, "Quarter/2Pc (HC)", i, 1060.50);
+            tot();
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int i = Integer.valueOf(q2.getText());
+        ++i;
+        q2.setText(String.valueOf(i));
+        try {
+            // TODO add your handling code here:
+            addTable(1, "Half /4Pc (HC)", i, 1990.99);
+            tot();
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int i = Integer.valueOf(q3.getText());
+        ++i;
+        q3.setText(String.valueOf(i));
+        try {
+            // TODO add your handling code here:
+            addTable(1, "BUCKET/6PC (H&C)", i, 2850.00);
+            tot();
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int i = Integer.valueOf(q4.getText());
+        ++i;
+        q4.setText(String.valueOf(i));
+        try {
+            // TODO add your handling code here:
+            addTable(1, "Full/8Pc (HC)", i, 3880.00);
+            tot();
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int i = Integer.valueOf(q5.getText());
+        ++i;
+        q5.setText(String.valueOf(i));
+        try {
+            // TODO add your handling code here:
+            addTable(1, "Bucket/12 Pc (HC)", i, 5650.00);
+            tot();
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int i = Integer.valueOf(q6.getText());
+        ++i;
+        q6.setText(String.valueOf(i));
+        try {
+            // TODO add your handling code here:
+            addTable(1, "1 Pc Choice (HC)", i, 680.00);
+            tot();
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -436,7 +582,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -456,5 +601,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel q4;
     private javax.swing.JLabel q5;
     private javax.swing.JLabel q6;
+    private javax.swing.JLabel tot;
     // End of variables declaration//GEN-END:variables
 }
