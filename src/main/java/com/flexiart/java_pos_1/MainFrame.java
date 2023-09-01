@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -454,7 +455,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        try {
+        if (balance.getText().equals("00")) {
+            JOptionPane.showMessageDialog(null, "Please make payment");
+        }
+        else{
+            try {
             bill.setText(" ---------------------  Flexiart POS  --------------------- \n");
 //            bill.setText(bill.getText()+"                            Trail Version                           \n");
             bill.setText(bill.getText()+"                         +9477 3431660                           \n");
@@ -484,17 +489,24 @@ public class MainFrame extends javax.swing.JFrame {
             bill.setText(bill.getText()+" ================================== \n");
         } catch (Exception e) {
         }
+        }
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        DecimalFormat df = new DecimalFormat("00.00");
+        try {
+            DecimalFormat df = new DecimalFormat("00.00");
         
-        double total = Double.valueOf(tot.getText());
-        double pay = Double.valueOf(payment.getText());
-        double bal = pay - total;
+            double total = Double.valueOf(tot.getText());
+            double pay = Double.valueOf(payment.getText());
+            double bal = pay - total;
+            
+            balance.setText(String.valueOf(df.format(bal)));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please add payment value");
+        }
         
-        balance.setText(String.valueOf(df.format(bal)));
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -576,7 +588,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        DefaultTableModel dt = (DefaultTableModel)jTable1.getModel();
+        try {
+            DefaultTableModel dt = (DefaultTableModel)jTable1.getModel();
         
         String rm = dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
         
@@ -602,7 +615,13 @@ public class MainFrame extends javax.swing.JFrame {
             case "6":
                 q6.setText("0");
                 break;
+            default:
+                JOptionPane.showMessageDialog(null, "Select Item to remove");
         }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Select Item to remove");
+        }
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
