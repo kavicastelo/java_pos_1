@@ -460,35 +460,33 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else{
             try {
-            bill.setText(" ---------------------  Flexiart POS  --------------------- \n");
-//            bill.setText(bill.getText()+"                            Trail Version                           \n");
-            bill.setText(bill.getText()+"                         +9477 3431660                           \n");
-            bill.setText(bill.getText()+" \n");
-//            bill.setText(bill.getText()+" ---------------------  Flexiart POS  --------------------- \n");
-            bill.setText(bill.getText()+"  Item\t\tQTY     Price\n");
-            bill.setText(bill.getText()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+                bill.setText(" ---------------------  Flexiart POS  --------------------- \n");
+                bill.setText(bill.getText()+"                         +9477 3431660                           \n");
+                bill.setText(bill.getText()+" \n");
+                bill.setText(bill.getText()+"  Item\t\tQTY     Price\n");
+                bill.setText(bill.getText()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
             
-            DefaultTableModel df = (DefaultTableModel)jTable1.getModel();
+                DefaultTableModel df = (DefaultTableModel)jTable1.getModel();
             
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                String item = df.getValueAt(i, 1).toString();
-                String qty = df.getValueAt(i, 2).toString();
-                String price = df.getValueAt(i, 3).toString();
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+                    String item = df.getValueAt(i, 1).toString();
+                    String qty = df.getValueAt(i, 2).toString();
+                    String price = df.getValueAt(i, 3).toString();
                 
-                bill.setText(bill.getText()+"  "+item+"\t  "+qty+"         "+price+"\n");
+                    bill.setText(bill.getText()+"  "+item+"\t  "+qty+"         "+price+"\n");
+                }
+                bill.setText(bill.getText()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+                bill.setText(bill.getText()+"Sub Total : "+tot.getText()+"\n");
+                bill.setText(bill.getText()+"Cash      : "+payment.getText()+"\n");
+                bill.setText(bill.getText()+"Balance   : "+balance.getText()+"\n");
+                bill.setText(bill.getText()+" \n");
+                bill.setText(bill.getText()+"                    Thank you. Come again!                 \n");
+                bill.setText(bill.getText()+" \n");
+                bill.setText(bill.getText()+" \n");
+                bill.setText(bill.getText()+" flexi-art.com                                           v1.0.0\n");
+                bill.setText(bill.getText()+" ================================== \n");
+            } catch (Exception e) {
             }
-            bill.setText(bill.getText()+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
-            bill.setText(bill.getText()+"Sub Total : "+tot.getText()+"\n");
-            bill.setText(bill.getText()+"Cash      : "+payment.getText()+"\n");
-            bill.setText(bill.getText()+"Balance   : "+balance.getText()+"\n");
-            bill.setText(bill.getText()+" \n");
-            bill.setText(bill.getText()+"                    Thank you. Come again!                 \n");
-            bill.setText(bill.getText()+" \n");
-            bill.setText(bill.getText()+" \n");
-            bill.setText(bill.getText()+" flexi-art.com                                           v1.0.0\n");
-            bill.setText(bill.getText()+" ================================== \n");
-        } catch (Exception e) {
-        }
         }
         
     }//GEN-LAST:event_jButton7ActionPerformed
